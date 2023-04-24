@@ -1,0 +1,214 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 13px;
+    padding-bottom: 80px;
+}
+
+img {
+    width: 100%;
+    vertical-align: bottom;
+}
+
+header {
+    background-color: #3b86ff;
+    color: #fff;
+    padding: 18.75px 0;
+}
+
+header h1 {
+    font-size: 18px;
+    text-align: center;
+}
+
+.inner {
+    max-width: 370px;
+    margin: 0 auto;
+    padding: 24px 16px 0;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+.user {
+    display: flex;
+    justify-content: start;
+    margin-bottom: 4px;
+}
+
+.user-r {
+    justify-content: end;
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+    margin-bottom: 4px;
+}
+
+.user-name {
+    font-size: 11px;
+    color: #4d4f5c;
+    margin-bottom: 4px;
+}
+
+.message {
+    padding: 8px 12px;
+    color: #4d4f5c;
+    background-color: #edf0f5;
+    border-radius: 20px 20px 20px 0;
+    margin-bottom: 4px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.user-r .message {
+    color: #fff;
+    background-color: #3b86ff;
+    border-radius: 20px 20px 0 20px;
+}
+
+.date-time {
+    color: #4d4f5c;
+    font-size: 11px;
+}
+
+.user-r .date-time {
+    align-self: flex-end;
+}
+
+#form {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 0;
+    background-color: #fff;
+}
+
+.position-area {
+    position: relative;
+    max-width: 338px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 
+ファイルボタン、画像ボタン（今後実装予定）
+input[type="file"] {
+    display: none;
+}
+
+.file-input {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.link-file-input {
+    left: 0;
+}
+
+.image-file-input {
+    left: 27px;
+} */
+
+#message-area {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #e8e9ec;
+    padding: 20px 40px 20px 16px;
+    /* 
+    ファイルボタン、画像ボタン設置後
+    padding: 20px 40px 20px 54px;
+     */
+    resize: none;
+    display: block;
+    margin: 0 auto;
+}
+
+#message-area::placeholder {
+    font-size: 13px;
+    color: #3b86ff;
+}
+
+button {
+    width: 24px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+}
+
+/* タブレット画面 */
+@media (min-width: 768px) {
+    body {
+        font-size: 16px;
+        padding-bottom: 96px;
+    }
+
+    header {
+        padding: 25px 0;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .inner {
+        max-width: 750px;
+        padding: 48px 16px 0;
+    }
+
+    .user {
+        margin-bottom: 16px;
+    }
+
+    .message-container {
+        margin-bottom: 16px;
+    }
+
+    .user-name {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .message {
+        padding: 12px 16px;
+        margin-bottom: 8px;
+    }
+
+    .date-time {
+        font-size: 13px;
+    }
+
+    .position-area {
+        max-width: 718px;
+    }
+
+    #message-area {
+        padding: 28.5px 40px 28.5px 20px;
+    }
+
+    #message-area::placeholder {
+        font-size: 18px;
+    }
+
+    button {
+        width: 32px;
+        right: 16px;
+    }
+}

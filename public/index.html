@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" class="css" type="text/css">
+    <title>リアルチャットアプリ</title>
+</head>
+
+<body>
+    <header>
+        <h1>Realtime Chat App</h1>
+    </header>
+    <div class="inner">
+        <div class="container app">
+            <div id="messages">
+                <!-- <div class="user user-r">
+                    <div class="message-container">
+                        <p class="message">Yes I am! What’s up?</p>
+                        <p class="date-time">11:00</p>
+                    </div>
+                </div>
+                <div class="user ather-user">
+                    <div class="message-container">
+                        <p class="user-name">user</p>
+                        <p class="message">I have a quick question for you.</p>
+                        <p class="date-time">12:00</p>
+                    </div>
+                </div> -->
+            </div>
+            <form id="form" action="">
+                <div class="position-area">
+                    <!-- ファイルボタン、画像ボタン（今後実装予定） -->
+                    <!-- <label for="link-file-input" class="file-input link-file-input">
+                        <img src="img/link-file.png" alt="アイコン">
+                    </label>
+                    <input type="file" id="link-file-input" name="link-file-input" accept="image/*">
+                    <label for="file-input" class="file-input image-file-input">
+                        <img src="img/files-btn.png" alt="アイコン">
+                    </label>
+                    <input type="file" id="file-input" name="file-input" accept="image/*"> -->
+                    <textarea name="" id="message-area" rows="1" placeholder="Type your message here…"></textarea>
+                    <button><img src="img/send-btn.png" alt=""></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+
+</html>

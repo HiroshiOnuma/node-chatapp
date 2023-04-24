@@ -3,7 +3,6 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 const io = require("socket.io")(server);
-const PORT = 3002;
 
 app.use(express.static("public"));
 
@@ -35,6 +34,6 @@ io.on("connection", (socket) => {
 
 });
 
-server.listen(PORT, () => {
+server.listen(process.env.PORT || 3002, () => {
     console.log("listening on 3002");
 });

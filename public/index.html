@@ -16,23 +16,18 @@
         <h1>Realtime Chat App</h1>
     </header>
     <div class="inner">
-        <div class="container app">
-            <div id="messages">
-                <!-- <div class="user user-r">
-                    <div class="message-container">
-                        <p class="message">Yes I am! What’s up?</p>
-                        <p class="date-time">11:00</p>
-                    </div>
+        <div id="login">
+            <form id="login-form">
+                <div>
+                    <input type="text" name="name" id="name" class="user-name-input" placeholder="Username">
                 </div>
-                <div class="user ather-user">
-                    <div class="message-container">
-                        <p class="user-name">user</p>
-                        <p class="message">I have a quick question for you.</p>
-                        <p class="date-time">12:00</p>
-                    </div>
-                </div> -->
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        <div class="container" id="app">
+            <div id="messages">
             </div>
-            <form id="form" action="">
+            <form id="message-form" action="">
                 <div class="position-area">
                     <!-- ファイルボタン、画像ボタン（今後実装予定） -->
                     <!-- <label for="link-file-input" class="file-input link-file-input">
@@ -44,12 +39,14 @@
                     </label>
                     <input type="file" id="file-input" name="file-input" accept="image/*"> -->
                     <textarea name="" id="message-area" rows="1" placeholder="Type your message here…"></textarea>
-                    <button><img src="img/send-btn.png" alt=""></button>
+                    <button class="send-btn"><img src="img/send-btn.png" alt=""></button>
                 </div>
             </form>
         </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script src="js/chat.js"></script>
 </body>
 

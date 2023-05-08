@@ -267,7 +267,7 @@ input[type="file"] {
     }
 
     #message-area {
-        padding: 27px 40px 27px 20px;
+        padding: 27px 48px 27px 20px;
     }
 
     #message-area::placeholder {

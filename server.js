@@ -3,12 +3,12 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 const io = require("socket.io")(server);
-const mongoose = require("mongoose");
-const Thread = require("./models/Thread");
+// const mongoose = require("mongoose"); //MongoDBと接続するケース
+// const Thread = require("./models/Thread"); //MongoDBと接続するケース
 require("dotenv").config();
 const mongo_uri = process.env.MONGODB_URI;
 
-app.use(express.json());
+// app.use(express.json()); //MongoDBと接続するケース
 app.use(express.static("public"));
 
 //日時の取得
@@ -23,34 +23,35 @@ let minute = ('0' + (today.getMinutes())).slice(-2);
 let second = ('0' + (today.getSeconds())).slice(-2);
 let time = `${hour}:${minute}`;
 
-mongoose
-    .connect(mongo_uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        retryWrites: true
-    })
-    .then(() => console.log("db connected"))
-    .catch((err) => console.log(err));
+// //MongoDBと接続
+// mongoose
+//     .connect(mongo_uri, {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true,
+//         retryWrites: true
+//     })
+//     .then(() => console.log("db connected"))
+//     .catch((err) => console.log(err));
 
-//getメソッド
-app.get("/api/v1/threads", async (req, res) => {
-    try {
-        const allThreads = await Thread.find({});
-        res.status(200).json(allThreads);
-    } catch {
-        console.log(err);
-    }
-});
+// //getメソッド(MongoDBからデータを取得)
+// app.get("/api/v1/threads", async (req, res) => {
+//     try {
+//         const allThreads = await Thread.find({});
+//         res.status(200).json(allThreads);
+//     } catch {
+//         console.log(err);
+//     }
+// });
 
-//postメソッド
-app.post("/api/v1/thread", async (req, res) => {
-    try {
-        const createThread = await Thread.create(req.body);
-        res.status(200).json(createThread);
-    } catch {
-        console.log(err);
-    }
-});
+// //postメソッド(MongoDBにデータを追加)
+// app.post("/api/v1/thread", async (req, res) => {
+//     try {
+//         const createThread = await Thread.create(req.body);
+//         res.status(200).json(createThread);
+//     } catch {
+//         console.log(err);
+//     }
+// });
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/index.html");

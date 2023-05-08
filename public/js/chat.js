@@ -23,8 +23,8 @@ loginForm.addEventListener("submit", (e) => {
         socket.userName = userName;
         login.style.display = "none";
         app.classList.add("active");
-        //現在までのメッセージを画面に追加する処理を呼び出し
-        displayMessages();
+        //現在までのメッセージを画面に追加する処理を呼び出し(MongoDBと接続するケース)
+        // displayMessages();
     }
 });
 
@@ -33,66 +33,77 @@ socket.on("user joined", (userName) => {
     console.log(`${userName}さんがログインしました`);
 });
 
-//現在までのメッセージを画面に追加
-async function displayMessages() {
-    try {
-        const responce = await axios.get("/api/v1/threads");
-        responce.data.forEach(msgData => {
-            let userContainer = document.createElement("div");
-            userContainer.classList.add("user");
-            if (msgData.user === socket.userName) {
-                userContainer.classList.add("user-r");
-            }
-            messages.appendChild(userContainer);
-            let messageContainer = document.createElement("div");
-            messageContainer.classList.add("message-container");
-            userContainer.appendChild(messageContainer);
-            if (msgData.user !== socket.userName) {
-                let userName = document.createElement("p");
-                userName.classList.add("user-name");
-                userName.textContent = `${msgData.user}さん`;
-                messageContainer.appendChild(userName);
-            }
-            let message = document.createElement("p");
-            message.classList.add("message");
-            message.textContent = msgData.message;
-            messageContainer.appendChild(message);
+//現在までのメッセージを画面に追加(MongoDBと接続)
+// async function displayMessages() {
+//     try {
+//         const responce = await axios.get("/api/v1/threads");
+//         responce.data.forEach(msgData => {
+//             let userContainer = document.createElement("div");
+//             userContainer.classList.add("user");
+//             if (msgData.user === socket.userName) {
+//                 userContainer.classList.add("user-r");
+//             }
+//             messages.appendChild(userContainer);
+//             let messageContainer = document.createElement("div");
+//             messageContainer.classList.add("message-container");
+//             userContainer.appendChild(messageContainer);
+//             if (msgData.user !== socket.userName) {
+//                 let userName = document.createElement("p");
+//                 userName.classList.add("user-name");
+//                 userName.textContent = `${msgData.user}さん`;
+//                 messageContainer.appendChild(userName);
+//             }
+//             let message = document.createElement("p");
+//             message.classList.add("message");
+//             message.textContent = msgData.message;
+//             messageContainer.appendChild(message);
 
-            let dateTime = document.createElement("p");
-            dateTime.classList.add("date-time");
-            dateTime.textContent = msgData.time;
-            messageContainer.appendChild(dateTime);
-        });
-        //最新のメッセージの箇所で固定関数の呼び出し
-        windowScroll();
+//             let dateTime = document.createElement("p");
+//             dateTime.classList.add("date-time");
+//             dateTime.textContent = msgData.time;
+//             messageContainer.appendChild(dateTime);
+//         });
+//         //最新のメッセージの箇所で固定関数の呼び出し
+//         windowScroll();
 
-    } catch (err) {
-        console.log(err);
-    }
-}
+//     } catch (err) {
+//         console.log(err);
+//     }
+// }
 
-// form内容をサーバーに送信
-messageForm.addEventListener("submit", async function (e) {
+// form内容をサーバーに送信(MongoDBに追加しないケース)
+messageForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const messageText = messageInput.value.trim();
     const userNameInput = document.getElementById("name");
     const userName = userNameInput.value.trim();
-    const currentTime = `${('0' + (new Date().getHours())).slice(-2)}:${('0' + (new Date().getMinutes())).slice(-2)}`;
-
     if (!messageText) return;
     socket.emit("chat message", messageText);
-    try {
-        const responce = await axios.post("/api/v1/thread", {
-            message: messageText,
-            time: currentTime,
-            user: userName
-        });
-    } catch (err) {
-        console.log(err);
-    }
     messageInput.value = "";
     messageInput.style.height = "auto";
 });
+// form内容をサーバーに送信(MongoDBに追加するケース)
+// messageForm.addEventListener("submit", async function (e) {
+//     e.preventDefault();
+//     const messageText = messageInput.value.trim();
+//     const userNameInput = document.getElementById("name");
+//     const userName = userNameInput.value.trim();
+//     const currentTime = `${('0' + (new Date().getHours())).slice(-2)}:${('0' + (new Date().getMinutes())).slice(-2)}`;
+
+//     if (!messageText) return;
+//     socket.emit("chat message", messageText);
+//     try {
+//         const responce = await axios.post("/api/v1/thread", {
+//             message: messageText,
+//             time: currentTime,
+//             user: userName
+//         });
+//     } catch (err) {
+//         console.log(err);
+//     }
+//     messageInput.value = "";
+//     messageInput.style.height = "auto";
+// });
 
 //texareaをEnterキーで送信,Shiftキー+Enterキーで改行
 messageInput.addEventListener("keydown", (e) => {
@@ -102,6 +113,7 @@ messageInput.addEventListener("keydown", (e) => {
     }
 });
 
+//チャットメッセージをブラウザに表示する処理
 socket.on("chat message", function (msgData) {
     setTimeout(function () {
         let userContainer = document.createElement("div");
